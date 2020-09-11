@@ -105,7 +105,7 @@ routes.get("/", (req, res) => {
       .then((data) => {
         console.log(data);
         // fetch();
-        return res.json(data);
+        return res.json(data.animals);//added it to get into animals; one level deeper
       });
   });
 });
