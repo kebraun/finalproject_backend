@@ -5,13 +5,13 @@ const express = require("express");
 const routes = express.Router();
 const fetch = require("node-fetch");
 
-
-
 // animals/?type=cat&status=adoptable
-routes.get("/", (req, res) => {
+routes.get("/petfinder", (req, res) => {
+  let breed = req.query.breed;
+
   getToken().then((tokenData) => {
     console.log(tokenData);
-    fetch(`https://api.petfinder.com/v2/animals/?type=cat`, {
+    fetch(`https://api.petfinder.com/v2/animals/?type=cat&breed=${breed}`, {
       headers: {
         Authorization: tokenData.token_type + " " + tokenData.access_token,
         "Content-Type": "application/x-www-form-urlencoded",
@@ -21,9 +21,9 @@ routes.get("/", (req, res) => {
         return resp.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // fetch();
-        return res.json(data.animals);//added it to get into animals; one level deeper
+        return res.json(data.animals); //added it to get into animals; one level deeper
       });
   });
 });
