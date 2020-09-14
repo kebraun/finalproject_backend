@@ -6,6 +6,29 @@ const routes = express.Router();
 const fetch = require("node-fetch");
 
 // animals/?type=cat&status=adoptable
+routes.get("/petfinder/:id", (req, res) => {
+  let animalId = req.params.id;
+
+  getToken().then((tokenData) => {
+    console.log(tokenData);
+    fetch(`https://api.petfinder.com/v2/animals/${animalId}`, {
+      headers: {
+        Authorization: tokenData.token_type + " " + tokenData.access_token,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        // fetch();
+        return res.json(data.animal); //added it to get into animals; one level deeper
+      });
+  });
+});
+
+
 routes.get("/petfinder", (req, res) => {
   let breed = req.query.breed;
 
@@ -27,6 +50,14 @@ routes.get("/petfinder", (req, res) => {
       });
   });
 });
+
+
+
+
+
+
+
+
 
 let getToken = () => {
   let key = "w5wmnOOaxJ8lyNJxHw7MVeMRuc6tlY7saLzPZPYpLLpT7GqjiD";
