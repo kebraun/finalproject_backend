@@ -6,6 +6,7 @@ const express = require("express");
 // require the router object (with all the defined routes) to be used in this file
 const routes = require("./routes");
 const user = require("./user.api");
+const org = require("./org-routes");
 
 // require the cors module
 const cors = require("cors");
@@ -22,11 +23,12 @@ app.use(express.json());
 // use thee router object (with all the defined routes)
 app.use("/", routes);
 app.use("/", user);
+app.use("/", org);
 
 // define the port
 const port = 3000;
 
 // run the server
 app.listen(port, () => {
-	console.log(`Listening on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });

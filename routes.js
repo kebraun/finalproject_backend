@@ -28,7 +28,6 @@ routes.get("/petfinder/:id", (req, res) => {
   });
 });
 
-
 routes.get("/petfinder", (req, res) => {
   let breed = req.query.breed;
 
@@ -50,14 +49,6 @@ routes.get("/petfinder", (req, res) => {
       });
   });
 });
-
-
-
-
-
-
-
-
 
 let getToken = () => {
   let key = "w5wmnOOaxJ8lyNJxHw7MVeMRuc6tlY7saLzPZPYpLLpT7GqjiD";
